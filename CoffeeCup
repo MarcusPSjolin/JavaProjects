@@ -1,0 +1,50 @@
+public class CoffeeCup {
+    // Declare variables.
+    private boolean isFull;  // Is this cup full?  Default value false
+    private String n; // Create string to store name.
+    public int volume; // Create integer for volume of cups.
+
+    /**
+     * Returns whether this cup is full (true) or empty(false);
+     *
+     * @return is this cup full?
+     */
+    // Declare constructor of coffee cup.
+    CoffeeCup(String name, String size) {
+        n = name; // Assign value name to n
+        // Check for user input of volume.
+        if (size.toUpperCase() == ("SMALL")) { // Check if user inputs small.
+            volume = 250; // Set volume to 250 if user inputs small.
+        } else if (size.toUpperCase() == ("MEDIUM")) { // Check if user inputs medium.
+            volume = 350; //Set volume to 350 if user inputs medium.
+        } else if (size.toUpperCase() == ("LARGE")) { // Check if user inputs large.
+            volume = 500; // Set volume to 500 if user inputs large.
+        }
+    }
+    // Declare getName
+    public String getName() {
+        return n; // Returns n.
+    }
+    // Declare isFull.
+    public boolean isFull() {
+        return isFull; // Returns isFull.
+    }
+
+    // Fill this cup to the top
+    public void fill() {
+        isFull = true; // Set isFull to true.
+    }
+
+    // Drink this cup entirely
+    public boolean drink() {
+        // Check if the cup is full.
+        if (isFull) { // Check that coffee is full.
+            System.out.println("You glug the coffee in " + n + " down."); // Output that user drinks the coffee.
+            isFull = false; // Set isFull to false.
+            return true;
+        } else { // Coffee is empty.
+            System.out.println("You sip " + n + " furiously, but only suck air."); // Output that user tries to drink, but can't.
+            return false;
+        }
+    }
+}
