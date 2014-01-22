@@ -1,0 +1,652 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package math.calculator;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Marcus Sjolin 
+ * Class: ICS4U 
+ * Program: Math Calculator - Calculatzar
+ */
+public class MathCalculator {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        int selection; //integer variable to store user selection
+        Scanner kbScan = new Scanner(System.in); //declare scanner to read input from the keyboard
+        String input; //string variable to store user input
+        //loop infinitely
+        do {
+            System.out.println("What would you like to do?");
+            System.out.println("1. Determine the type of symmetry of a polynomial function");
+            System.out.println("2. Calculate the resulting remainder when a polynomial is divided by a binomial");
+            System.out.println("3. Calculate the solution(s) of a quadratic equation");
+            System.out.println("4. Calculate the y-intercept of a polynomial function");
+            System.out.println("5. Calculate the factors of an integer number");
+            System.out.println("6. Calculate the factors of a polynomial expression");
+            System.out.println("7. Determine the average rate of change between two points");
+            System.out.println("8. Calculate the area of a rectangle");
+            System.out.println("9. Calculate the area of a circle");
+            System.out.println("10. Calculate a factorial");
+            System.out.println("11. Calculate a permutation");
+            System.out.println("12. Calculate a combination");
+            System.out.println("13. Quit");
+
+            //loop infinitely
+            do {
+                selection = getInt(""); //get selection from user
+                //verify that index of selection is within bounds of functions
+                if (selection >= 1 && selection <= 13) {
+                    executeCommand(selection); //execute function
+                    break; //exit loop
+                } else {
+                    //invalid selection
+                    System.out.println("Invalid selection, please enter a number from 1 to 15.");
+                }
+            } while (true); //loop
+
+            System.out.println("Would you like to perform another calculation? (yes/no)");
+            //loop infinitely
+            do {
+                input = kbScan.nextLine(); //read and store input from keyboard;
+                //check value of input
+                if (input.toLowerCase().equals("no") || input.toLowerCase().equals("n")) {
+                    System.exit(0); //exit program
+                } else if (input.toLowerCase().equals("yes") || input.toLowerCase().equals("y")) {
+                    break; //exit loop
+                } else {
+                    //invalid input, prompt user to enter valid input
+                    System.out.println("Invalid selection, please enter either yes or no:");
+                }
+            } while (true); //loop
+        } while (true); //loop
+    }
+
+    /**
+     * Obtains a positive non-zero integer value from the user
+     *
+     * @param prompt the prompt that is displayed to the user when requesting
+     * input
+     * @return integer value obtained
+     */
+    public static int getInt(String prompt) {
+        Scanner kbScan = new Scanner(System.in); //declare scanner to read input from keyboard
+        int input; //integer variable to store value entered by user
+        System.out.print(prompt); //print prompt to screen
+        //loop infinitely
+        do {
+            //try to read integer value from keyboard
+            try {
+                input = kbScan.nextInt(); //set input equal to value read
+                //check that input is positive non-zero value
+                if (input > 0) {
+                    return input; //return value obtained
+                } else {
+                    //invalid input
+                    System.out.println("Invalid input, please enter a positive non-zero integer value.");
+                }
+            } catch (InputMismatchException e) {
+                //catch type mismatch exception, prompt user to enter correct value
+                System.out.println("Invalid input, please enter a positive non-zero integer value.");
+            }
+            kbScan.nextLine(); //flush scanner
+        } while (true); //loop
+    }
+
+    /**
+     * Obtains a double value from the user
+     *
+     * @param prompt the prompt that is displayed to the user when requesting
+     * input
+     * @return double value obtained
+     */
+    public static double getDouble(String prompt) {
+        Scanner kbScan = new Scanner(System.in); //declare scanner to read input from keyboard
+        System.out.print(prompt); //print prompt to screen
+        //loop infinitely
+        do {
+            //try to read double variable from keyboard
+            try {
+                return kbScan.nextDouble(); //return value obtained
+            } catch (InputMismatchException e) {
+                //catch type mismatch exception, prompt user to enter correct value
+                System.out.println("Invalid selection, please enter only numeric characters");
+            }
+            kbScan.nextLine(); //flush scanner
+        } while (true); //loop
+    }
+
+    /**
+     * Executes a function of the calculator
+     *
+     * @param selection the integer value of the function selected by the user
+     */
+    public static void executeCommand(int selection) {
+        //check which function is selected
+        if (selection == 1) {
+            //prompt user to enter parameters for symmetry function, call function and print result to screen
+            System.out.println(symmetry(getDouble("Please enter the value of the coefficient of the term of degr"
+                    + "ee six: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree five: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree four: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree three: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree two: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree one: "),
+                    getDouble("Please enter the value of the constant term: ")));
+        } else if (selection == 2) {
+            //prompt user to enter parameters for remainder function, call function and print result to screen
+            System.out.println(remainder(getDouble("Please enter the value of the coefficient of the term "
+                    + "of degree six: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree five: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree four: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree three: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree two: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree one: "),
+                    getDouble("Please enter the value of the constant term: "),
+                    getDouble("Please enter a value for 'a' in the divisor (ax - b): "),
+                    getDouble("Please enter a value for 'b in the divisor (ax - b): ")));
+        } else if (selection == 3) {
+            //prompt user to enter parameters for solveQuadratic function, call function and print result to screen
+            System.out.println(solveQuadratic(getDouble("Please enter the value of the leading coefficient: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree one: "),
+                    getDouble("Please enter the value of the constant term: ")));
+        } else if (selection == 4) {
+            //prompt user to enter parameters for yintercept function, call function and print result to screen
+            System.out.println(yintercept(getDouble("Please enter the value of the coefficient of the term of degr"
+                    + "ee six: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree five: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree four: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree three: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree two: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree one: "),
+                    getDouble("Please enter the value of the constant term: ")));
+        } else if (selection == 5) {
+            //prompt user to enter parameters for listFactors function, call function and print result to screen
+            double[] printFact;
+            printFact = listFactors(getDouble("Enter the integer you would like to find factors for: "));
+            //loop through array
+            for (int i = 0; i < printFact.length; i++) {
+                //print the factor
+                System.out.println(printFact[i]);
+            }
+        } else if (selection == 6) {
+            //prompt user to enter parameters for factors function, call function and print result to screen
+            System.out.println(xInts(getDouble("Please enter the value of the coefficient of the term of degr"
+                    + "ee six: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree five: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree four: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree three: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree two: "),
+                    getDouble("Please enter the value of the coefficient of the term of degree one: "),
+                    getDouble("Please enter the value of the constant term: ")));
+        } else if (selection == 7) {
+            //prompt user to enter parameters for rate of change function, call function and print result to screen
+            System.out.println(roc(getDouble("Please enter the x value of the first point: "),
+                    getDouble("Please enter the y value of the first point: "),
+                    getDouble("Please enter the x value of the second point: "),
+                    getDouble("Please enter the y value of the second point: ")));
+        } else if (selection == 8) {
+            //prompt user to enter parameters for area rectangle function, call function and print result to screen
+            System.out.println("The area of the rectangle is: " + areaRectangle(getDouble("Please enter th"
+                    + "e length of the rectangle: "),
+                    getDouble("Please enter the width of the rectangle: ")));
+        } else if (selection == 9) {
+            //prompt user to enter parameters for area circle function, call function and print result to screen
+            System.out.println("The area of the corresponding circle is: " + areaCircle(getDouble("Please enter t"
+                    + "he radius of the cirlce: ")));
+        } else if (selection == 10) {
+            //prompt user to enter value of factorial to be calculated, call function and print result to screen
+            System.out.println(factorial(getInt("Please enter the value of the factorial to be calculated: ")));
+        } else if (selection == 11) {
+            //prompt user to enter parameters for permutation function, call function and print result to screen
+            System.out.println(permutation(getInt("Select from how many elements? "),
+                    getInt("Select how many elements? ")));
+        } else if (selection == 12) {
+            //prompt user to enter parameters for combination function, call function and print result to screen
+            System.out.println(combination(getInt("Select from how many elements? "),
+                    getInt("Select how many elements? ")));
+        } else {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Calculate the y-intercept of a polynomial function in standard form up to
+     * degree 6
+     *
+     * @param a6 coefficient of term of degree 6
+     * @param a5 coefficient of term of degree 5
+     * @param a4 coefficient of term of degree 4
+     * @param a3 coefficient of term of degree 3
+     * @param a2 coefficient of term of degree 2
+     * @param a1 coefficient of term of degree 1
+     * @param a0 value of constant term
+     * @return the y-intercept of the function
+     */
+    public static double yintercept(double a6, double a5, double a4, double a3, double a2, double a1, double a0) {
+        return a1; //return value of constant term
+    }
+
+    /**
+     * Calculates the factorial of an integer number
+     *
+     * @param x the value to be calculated
+     * @return the value of the factorial
+     */
+    public static long factorial(int x) {
+        long product = x; //declare variable to store value of factorial, set equal to integer being calculated
+        //loop through all integers from integer being calculated to zero
+        for (long m = x - 1; m > 1; m--) {
+            product = product * m; //multiply product
+        }
+        return product; //return value of factorial
+    }
+
+    /**
+     * Calculates any solutions of a quadratic equation
+     *
+     * @param a coefficient of term of degree 2
+     * @param b coefficient of term of degree 1
+     * @param c value of constant term
+     * @return string containing solution(s)
+     */
+    public static String solveQuadratic(double a, double b, double c) {
+        //calculate number of solutions
+        if (Math.pow(b, 2) - 4 * a * c < 0) {
+            return "No solutions."; //no solutions
+        } else if (Math.pow(b, 2) - 4 * a * c == 0) {
+            //one solution
+            //calculate and return solution
+            return "One solution: x=" + (((-1) * b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a));
+        } else {
+            //two solutions
+            //calculate and return solutions
+            return "Two solutions: x=" + (((-1) * b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a))
+                    + " and x=" + (((-1) * b - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a));
+        }
+    }
+
+    /**
+     * Calculates number of permutations
+     *
+     * @param elements number of elements in set
+     * @param select number of elements selected
+     * @return value of permutation
+     */
+    public static long permutation(int elements, int select) {
+        return factorial(elements) / factorial(elements - select); //calculate and return permutation
+    }
+
+    /**
+     * Calculates number of combinations
+     *
+     * @param elements number of elements in set
+     * @param select number of elements selected
+     * @return number of combinations
+     */
+    public static long combination(int elements, int select) {
+        return factorial(elements) / (factorial(elements - select) * factorial(select)); //calculate and return combination
+    }
+
+    /**
+     * takes a number and returns all of its factors
+     *
+     * @param x0 a constant that the user is trying to find factors for
+     * @return array of all factors
+     */
+    public static double[] listFactors(double x0) {
+        //stores constant divided by given factor
+        double quotient;
+        //stores total number of factors
+        int numFactors = 0;
+        //stores current index of factor array
+        int currentFactor = 0;
+        //determine number of factors and therefore array length
+        //run with a positive constant
+        x0 = Math.abs(x0);
+        //run for all numbers inbetween the constant and one
+        for (int i = 0; i < x0; i++) {
+            //calculate quotient
+            quotient = (double) x0 / (x0 - i);
+            //if quotient is not a decimal
+            if (!isDecimal(quotient)) {
+                //increment number of factors
+                numFactors++;
+            }
+        }
+        //use number of factors to set array length
+        double[] factorList = new double[numFactors];
+        //write onto array
+        //run for all numbers inbetween the constant and one
+        for (int i = 0; i < x0; i++) {
+            //calculate quotient
+            quotient = (double) x0 / (x0 - i);
+            //check if quotient is not a decimal
+            if (!isDecimal(quotient)) {
+                //send factor into array
+                factorList[currentFactor] = (x0 - i);
+                //increment index
+                currentFactor++;
+            }
+        }
+        //return an array of all factors of given constant
+        return (factorList);
+    }
+
+    /**
+     * Takes in two points and calculates the average rate of change between
+     * them
+     *
+     * @param x1 x-coordinate of point 1
+     * @param y1 y-coordinate of point 1
+     * @param x2 x-coordinate of point 2
+     * @param y2 y-coordinate of point 2
+     * @return average rate of change for given line (double)
+     */
+    public static double roc(double x1, double y1, double x2, double y2) {
+        //calculate slope
+        return ((double) (y2 - y1) / (x2 - x1));
+    }
+
+    /**
+     * determines if a number is a decimal number
+     *
+     * @param x any double
+     * @return boolean whether or not the number is a decimal
+     */
+    public static boolean isDecimal(double x) {
+        //create string to store number
+        String decimal;
+        //integer stores location of decimal
+        int decimalPlace;
+        //turn given double into string
+        decimal = Double.toString(x);
+        //determine position of decimal
+        decimalPlace = decimal.indexOf('.');
+        //take portion of string after the decimal
+        decimal = decimal.substring(decimalPlace);
+        //turn string back into double
+        double afterDecimal = Double.parseDouble(decimal);
+        //check if after decimal is .0
+        if (afterDecimal * afterDecimal == afterDecimal) {
+            //is not a decimal
+            return (false);
+        } else {
+            //is a decimal
+            return (true);
+        }
+    }
+
+    /**
+     * determines the x-intercepts of a given function
+     *
+     * @param x6 coefficient of sixth term
+     * @param x5 coefficient of fifth term
+     * @param x4 coefficient of fourth term
+     * @param x3 coefficient of third term
+     * @param x2 coefficient of second term
+     * @param x1 coefficient of first term
+     * @param x0 coefficient of constant term
+     * @return string of all x-ints in factored form
+     */
+    public static String xInts(double x6, double x5, double x4, double x3, double x2, double x1, double x0) {
+
+        //stores degree of function
+        int degree;
+        //stores outcome of substituting value into function
+        double outcome;
+        //counter storing number of factors
+        int foundFactors = 0;
+        //stores output
+        String xints = "";
+        //stores factors of the lead coefficient
+        double[] leadingCoeff;
+        //stores current constant factor being used to find the value
+        double constant;
+        //stores curent a value factor being used to find the value
+        double a;
+        //stores current value being tested 
+        double value;
+        //stores current index of values found array
+        int currValue = 0;
+        //determine degree
+        //check if preceding terms are zero
+        if (x2 == 0 && x3 == 0 && x4 == 0 && x5 == 0 && x6 == 0) {
+            //find factors for lead coefficient
+            leadingCoeff = listFactors(x1);
+            //set degree
+            degree = 1;
+        } //repeat for all terms
+        else if (x3 == 0 && x4 == 0 && x5 == 0 && x6 == 0) {
+            leadingCoeff = listFactors(x2);
+            degree = 2;
+        } else if (x4 == 0 && x5 == 0 && x6 == 0) {
+            leadingCoeff = listFactors(x3);
+            degree = 3;
+        } else if (x5 == 0 && x6 == 0) {
+            leadingCoeff = listFactors(x4);
+            degree = 4;
+        } else if (x6 == 0) {
+            leadingCoeff = listFactors(x5);
+            degree = 5;
+        } else {
+            leadingCoeff = listFactors(x6);
+            degree = 6;
+        }
+        //find and store factors of constant term
+        double[] substitute = listFactors(x0);
+        //array stores all the values that are zeroes of the function
+        double[] valuesFound = new double[degree];
+        //run through factors of constant term
+        for (int i = 0; i < substitute.length; i++) {
+            //run through factors if leading coefficient
+            for (int x = 0; x < leadingCoeff.length; x++) {
+                //read in current factor of constant
+                constant = substitute[i];
+                //read in current factor of lead coefficient
+                a = leadingCoeff[x];
+                //determine quotient
+                value = Math.abs(constant / a);
+                //sub value into function
+                outcome = x6 * Math.pow(value, 6) + x5 * Math.pow(value, 5) + x4 * Math.pow(value, 4)
+                        + x3 * Math.pow(value, 3) + x2 * Math.pow(value, 2) + x1 * Math.pow(value, 1) + x0;
+                //check that there are no remainders
+                if (outcome == 0) {
+                    //stores whether or not a value has been repeated
+                    boolean repeat = false;
+                    //run for as many factors are possible for the function
+                    for (int j = 0; j < valuesFound.length; j++) {
+                        //check if the value has already been found
+                        if (value == valuesFound[j]) {
+                            //the value is repeated
+                            repeat = true;
+                        }
+                    }
+                    //check if value is unique
+                    if (repeat == false) {
+                        //add value to array 
+                        valuesFound[currValue] = value;
+                        //increment index
+                        currValue++;
+                        //increment number of factors found
+                        foundFactors++;
+                        //add factor to output
+                        xints = xints + "(x - " + value + ")";
+                    }
+                }
+                //use negative value of value for negative factors
+                value = value * -1;
+                //sub value into function
+                outcome = x6 * Math.pow(value, 6) + x5 * Math.pow(value, 5) + x4 * Math.pow(value, 4)
+                        + x3 * Math.pow(value, 3) + x2 * Math.pow(value, 2) + x1 * Math.pow(value, 1) + x0;
+                //check that there are no remainders
+                if (outcome == 0) {
+                    //stores whether or not a value has been repeated
+                    boolean repeat = false;
+                    //run for as many factors are possible for the function
+                    for (int j = 0; j < valuesFound.length; j++) {
+                        //check if the value has already been found
+                        if (value == valuesFound[j]) {
+                            //the value has been repeated
+                            repeat = true;
+                        }
+                    }
+                    //check if value is unique
+                    if (repeat == false) {
+                        //add value to array
+                        valuesFound[currValue] = value;
+                        //increment index
+                        currValue++;
+                        //increment number of factors found
+                        foundFactors++;
+                        //add factor to output
+                        xints = xints + "(x + " + Math.abs(value) + ")";
+                    }
+                }
+            }
+        }
+        //check if all factors were found
+        if (degree - foundFactors > 0) {
+            /*give user message if total possible factors were not found
+             * if the program can't find all of the factors for the function, it atleast gives the user
+             * one of the factors and will allow them to factor the function easier
+             */
+            xints = xints + "Up to " + (degree - foundFactors) + " factors remaining";
+
+        }
+        //if no factors were found
+        if (foundFactors == 0) {
+            //set output as message
+            xints = "No factors were found";
+        }
+        //return factors(x-ints)
+        return (xints);
+    }
+
+    /**
+     * This method calculates the area of a rectangle or square, given the
+     * length and width
+     *
+     * @param length value of the length of the rectangle
+     * @param width value of the width of the rectangle
+     * @return
+     */
+    public static double areaRectangle(double length, double width) {
+        // Declare variable for area.
+        double area; // Create variable for area.
+        area = length * width; // Calculate area and store value in variable.
+        return area; // Return area.
+    }
+
+    /**
+     * This method calculates the radius of a circle, given the radius
+     *
+     * @param radius value of the radius of the circle
+     * @return
+     */
+    public static double areaCircle(double radius) {
+        // Declare variable for the area of the circle.
+        double area; // Create variable for area.
+        area = 3.14159265359 * ((radius) * (radius)); // Calculate the area of a circle, given the radius.
+        return area; // Return the area.
+    }
+
+    /**
+     * This method checks for line or point symmetry
+     *
+     * @param six coefficient of the sixth term
+     * @param five coefficient of the fifth term
+     * @param four coefficient of the fourth term
+     * @param three coefficient of the third term
+     * @param two coefficient of the second term
+     * @param one coefficient of the first term
+     * @param zero coefficient of the constant term
+     * @return 
+     */
+    public static String symmetry(double six, double five, double four, double three, double two, double one, double zero) {
+        // Declare variables.
+        double degree; // Create a variable for th degree of the function.
+        boolean odd = false; // Create a boolean variable for whether the function is odd or not.
+        String original; // Create a variable for the original function.
+        String reflection; // Create a variable for the potential reflection of the function.
+        String symmetry = ""; //Create a variable for the result
+        //String symmetry; // Create a variable for symmetry
+
+        // Check for the degree of the function. Set the odd variable correspondingly to true or false.
+        if (six != 0) { // Check if the degree of the function is 6. 
+            //degree = 6; // Set degree to 6.
+            odd = false; // Set odd to false as function is even.
+        } else if (five != 0) { // Check if the degree of the function is 5.
+            //degree = 5; // Set degree to 5.
+            odd = true; // Set odd to true as function is odd.
+        } else if (four != 0) { // Check if the degree of the function is 4.
+            //degree = 4; // Set degree to 4.
+            odd = false; // Set odd to false as the function is even.
+        } else if (three != 0) { // Check if the degree of the function is 3.
+            //degree = 3; // Set degree to 3.
+            odd = true; // Set odd to true as the function is odd.
+        } else if (two != 0) { // Check if the degree of the function is 2. 
+            //degree = 2; // Set degree to 2.
+            odd = false; // Set odd to false as the function is even.
+        } else if (one != 0) { // Check if the degree of the funciton is 1.
+            //degree = 1; // Set degree to 1.
+            odd = true; // Set odd to true as the function is odd.
+        }
+        // Check if function is odd. 
+        if (odd == false) {
+            // Assign value to original with f(x) function.
+            original = "(" + six + ")x^6 + " + "(" + five + ")x^5 + " + "(" + four + ")x^4 + " + "(" + three + ")x^3 + " + "(" + two + ")x^2 + " + "(" + one + ")x + " + zero;
+            // Assign values to variables.
+            five = (int) five * -1; // Multiply five by -1.
+            three = (int) three * -1; // Multiply three by -1.
+            one = (int) one * -1; // Multiply one by -1.
+            // Assign value to reflection variable with f(-x) function.
+            reflection = "(" + six + ")x^6 + " + "(" + five + ")x^5 + " + "(" + four + ")x^4 + " + "(" + three + ")x^3 + " + "(" + two + ")x^2 + " + "(" + one + ")x + " + zero;
+            // Check if functions are equal.
+            if (original.equals(reflection)) {
+                symmetry = "This function has line symmetry"; // If functions are equal, assign string to output.
+            } else {
+                symmetry = "This function does not have line symmetry"; // If functions are not equal, assign string to output.
+            }
+        }
+        // Check if function is odd.
+        if (odd == true) {
+            // Check for symmetry.
+            if ((zero != 0) || (six != 0) || (four != 0) || (two != 0)) { // Check is zero, six, four and two are equal to zero.
+                symmetry = "This function does not have point symmetry"; // Assign value to output in string if function is not symmetrical.
+            } else {
+                symmetry = "This function is symmetrical about the origin"; // Assign value to output in string if function is symmetrival.
+            }
+        }
+        // Return value.
+        return symmetry;
+    }
+
+    /**
+     * This method returns the remainder when a polynomial function is divided
+     * by a divisor of the form (ax - b).
+     * @param six coefficient of the sixth term
+     * @param five coefficient of the fifth term
+     * @param four coefficient of the fourth term
+     * @param three coefficient of the third term
+     * @param two coefficient of the second term
+     * @param one coefficient of the first term
+     * @param zero coefficient of the constant term
+     * @param a value of the "a" variable in (ax - b)
+     * @param b value of the "b" variable in (ax - b)
+     * @return
+     */
+    public static double remainder(double six, double five, double four, double three, double two, double one, double zero, double a, double b) {
+        // Declare variable.
+        double remainder; // Create variable to store remainder.
+        remainder = (six * Math.pow(b / a, 6)) + (five * Math.pow(b / a, 5)) + (four * Math.pow(b / a, 4)) + (three * Math.pow(b / a, 3)) + (two * Math.pow(b / a, 2)) + (one * (b / a)) + zero; // Calculate remainder.
+        return remainder; // Return remainder.
+    }
+}
