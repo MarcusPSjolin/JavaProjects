@@ -1,0 +1,57 @@
+package calculatzar;
+
+import java.util.Scanner;
+
+/**
+ * @author Marcus Sjolin
+ * 064639370
+ * ICS4U
+ */
+public class Calculatzar {
+    /**
+     * This method prompts the user for the width and length of a rectangle and calls the corresponding method to perform the necessary calculations
+     */
+    public void callAreaRectangle() {
+        // Declare variables for length and width.
+        double length; // Create variable for length.
+        double width; // Create variable for width.
+        // Prompt user for input.
+        System.out.println("Please enter the length of a rectangle"); // Prompt user for the length of the rectangle.
+        Scanner kbScan = new Scanner(System.in); // Create a new scanner.
+        length = kbScan.nextDouble(); // Scan user input and store in variable length.
+        System.out.println("Please enter the width of a rectangle"); // Prompt user for the width of the rectangle.
+        width = kbScan.nextDouble(); // Scan user input and store in variable width.
+        System.out.println("The area of the rectangle is: " + areaRectangle(length, width)); // Output the area of the rectangle.
+    }
+    
+    /**
+     * This method calculates the area of a rectangle or square, given the length and width
+     * @param length
+     * @param width
+     * @return
+     */
+    public double areaRectangle(double length, double width) {
+        // Declare variable for area.
+        double area; // Create variable for area.
+        area = length * width; // Calculate area and store value in variable.
+        return area; // Return area.
+    }
+    /**
+     * This method prompts the user for inputs and then calls the corresponding method to perform the necessary calculations 
+     */
+    public void callAreaCircle() {
+        // Declare variable for radius.
+        double radius; // Create variable for radius.
+        System.out.println("Please enter the radius of a circle"); // Prompt user for the radius of the circle.
+        Scanner kbScan = new Scanner(System.in); // Create new scanner.
+        radius = kbScan.nextDouble(); // Scan user input for the radius and store the value in a variable.
+        System.out.println("The area of the corresponding circle is: " + areaCircle(radius)); // Output the area of the circle.
+    }
+    /**
+     * This method calculates the radius of a circle, given the radius
+     * @param radius
+     * @return
+     */
+    public double areaCircle(double radius) {
+        // Declare variable for the area of the circle.
+        double area; // Create variable for area.
